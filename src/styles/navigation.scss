@@ -13,9 +13,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // navbar items
 .navbar {
-  @apply relative flex max-w-[1260px] flex-wrap items-center justify-between;
-  background-image: url('/images/banner.png');
-  height: 250px;
+  @apply relative flex flex-wrap items-center justify-between;
 }
 
 .navbar-brand img {
@@ -44,6 +42,11 @@ input#nav-toggle:checked ~ #nav-menu {
 
 .nav-dropdown-link {
   @apply block min-w-[150px] py-1 text-[17px] font-semibold text-dark transition hover:text-primary;
+}
+
+.nav-banner {
+  background-image: url('/images/banner.png');
+  height: 250px;
 }
 
 // search style
