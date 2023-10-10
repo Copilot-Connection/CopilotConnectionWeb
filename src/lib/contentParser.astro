@@ -9,8 +9,12 @@ export const getSinglePage = async (collection: any) => {
 };
 
 export const getPodcasts = async () => {
+  console.log('Retrieving podcasts');
+  
   const buzzsproutToken = import.meta.env.BUZZSPROUT_TOKEN;
   const buzzsproutPodID = import.meta.env.BUZZSPROUT_PODID;
+  console.log(`Podcast ID: ${buzzsproutPodID}`);
+
   const response = await fetch(`https://www.buzzsprout.com/api/${buzzsproutPodID}/episodes.json`,
   {
     method: 'GET',
@@ -18,9 +22,6 @@ export const getPodcasts = async () => {
   });
 
   const json = await response.json();
-  //const { film } = json.data;
-  // const allPage = await getCollection(json);
-  console.log(json);
   return json;
 };
 ---
