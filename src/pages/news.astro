@@ -5,20 +5,19 @@ import Pagination from "@layouts/components/Pagination.astro";
 import Posts from "@layouts/Posts.astro";
 import Podcasts from "@layouts/Podcasts.astro";
 import { getSinglePage, getPodcasts } from "@lib/contentParser.astro";
-import { sortPodByDate } from "@lib/utils/sortFunctions";
+import { sortByDate } from "@lib/utils/sortFunctions";
 
 const posts = await getSinglePage("posts");
-const podcasts = await getPodcasts();
-const sortedPodcasts = sortPodByDate(podcasts);
-const totalPods = Math.ceil(posts.length / config.settings.pagination);
-const currentPosts = sortedPodcasts.slice(0, config.settings.pagination);
+const sortedPosts = sortByDate(posts);
+const totalPages = Math.ceil(posts.length / config.settings.pagination);
+const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 ---
 
 <Base>
   <section class="section">
     <div class="container">
-      <Podcasts podcasts={podcasts} className="mb-16" />
-      <Pagination currentPage={1} totalPages={totalPods} />
+      <Posts posts={currentPosts} className="mb-16" />
+      <Pagination currentPage={1} totalPages={totalPages} />
     </div>
   </section>
 </Base>

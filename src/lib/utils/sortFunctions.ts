@@ -8,6 +8,15 @@ export const sortByDate = (array: any[]) => {
   return sortedArray;
 };
 
+export const sortPodByDate = (array: any[]) => {
+  const sortedArray = array.sort(
+    (a:any, b:any) =>
+      new Date(b.published_at && b.published_at) -
+      new Date(a.published_at && a.published_at)
+  );
+  return sortedArray;
+};
+
 // sort product by weight
 export const sortByWeight = (array: any[]) => {
   const withWeight = array.filter(
