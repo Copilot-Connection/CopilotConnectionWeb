@@ -46,6 +46,8 @@ input#nav-toggle:checked ~ #nav-menu {
 
 .nav-banner {
   background-image: url('/images/banner.png');
+  background-position: center;
+  background-repeat: no-repeat;
   height: 250px;
 }
 
