@@ -12,7 +12,7 @@ import { humanize,slugify } from "@lib/utils/textConverter";
 export async function getStaticPaths() {
   const podcasts = await getPodcasts();
 
-  const paths = podcasts.map((podcast) => ({
+  const paths = podcasts.map((podcast: any) => ({
     params: {
       single: podcast.slug,
     },

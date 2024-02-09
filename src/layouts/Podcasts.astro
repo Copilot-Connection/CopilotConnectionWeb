@@ -37,7 +37,7 @@ const { className, podcasts, fluid } = Astro.props;
           </a>
         </h3>
         <p class="text-text">
-          {podcast.description?.slice(0, Number(i === 0 && fluid != false ? summary_length * 2 : summary_length))}...
+          <Fragment set:html={podcast.description?.slice(0, Number(i === 0 && fluid != false ? summary_length * 2 : summary_length))} />...
         </p>
       </div>
     ))

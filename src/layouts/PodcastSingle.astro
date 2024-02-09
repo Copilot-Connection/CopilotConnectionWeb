@@ -2,6 +2,7 @@
 import { Image } from "@astrojs/image/components";
 import Share from "@components/Share.astro";
 import SimilarPodcasts from "@components/SimilarPodcasts.astro";
+import Player from "@components/Player.astro";
 import { getPodcasts } from "@lib/contentParser.astro";
 import dateFormat from "@lib/utils/dateFormat";
 import similarPodcasts from "@lib/utils/similarPodcasts";
@@ -15,7 +16,7 @@ interface Props {
 const podcasts = await getPodcasts();
 const { podcast } = Astro.props;
 const similarPods = similarPodcasts(podcast, podcasts, podcast.slug);
-const { title, description, artwork_url, published_at, tags } =
+const { id, title, description, artwork_url, published_at, tags } =
 podcast;
 ---
 
@@ -36,11 +37,20 @@ podcast;
           </a>
         )}
       </div>
-
+      <ul class="mt-6 mb-4 flex flex-wrap items-center text-text">
+        <li class="mr-5 flex items-center flex-wrap font-medium">
+          <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
+          <>{dateFormat(published_at)}</>
+        </li>
+      </ul>
+      <h3 class="mb-4">
+        {title}
+      </h3>
       <div class="md:col-10">
         <div class="content mb-16 text-left">
           <Fragment set:html={description} />
         </div>
+        <Player podcastId={id} audio_url="" />
         <div class="flex flex-wrap items-center justify-between">
           <ul class="mr-4 mb-4 space-x-3">
             {
