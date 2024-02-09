@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Picture } from "astro-imagetools/components";
 import config from "@config/config.json";
 import { getSinglePage } from "@lib/contentParser.astro";
 import dateFormat from "@lib/utils/dateFormat";
@@ -16,7 +16,7 @@ const { className, podcasts, fluid } = Astro.props;
       <div class={i === 0 && fluid != false ? "col-12" : "col-12 sm:col-6"}>
         {podcast.artwork_url && (
           <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
-            <Image
+            <Picture
               class="group-hover:scale-[1.03] transition duration-300 w-full"
               src={podcast.artwork_url}
               alt={podcast.title}

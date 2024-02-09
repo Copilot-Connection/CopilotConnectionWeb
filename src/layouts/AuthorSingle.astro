@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Picture } from "astro-imagetools/components";
 import Social from "@components/Social.astro";
 import { markdownify } from "@lib/utils/textConverter";
 
@@ -14,7 +14,7 @@ const { Content } = await author.render();
       {
         image && (
           <div class="mb-8">
-            <Image
+            <Picture
               src={image}
               class="mx-auto rounded-lg"
               height={150}

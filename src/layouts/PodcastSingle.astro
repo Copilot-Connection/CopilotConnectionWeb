@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Picture } from "astro-imagetools/components";
 import Share from "@components/Share.astro";
 import SimilarPodcasts from "@components/SimilarPodcasts.astro";
 import Player from "@components/Player.astro";
@@ -27,7 +27,7 @@ podcast;
       <div class="col-12 mt-8 mb-2">
         {artwork_url && (
           <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
-            <Image
+            <Picture
               class="group-hover:scale-[1.03] transition duration-300 w-full"
               src={artwork_url}
               alt={title}
