@@ -10,7 +10,7 @@
     },
     {
       "name": "Articles",
-      "url": "",
+      "url": "/articles",
       "hasChildren": true,
       "children": [
         {
