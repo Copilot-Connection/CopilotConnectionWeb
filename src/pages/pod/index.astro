@@ -1,0 +1,22 @@
+---
+import config from "@config/config.json";
+import Base from "@layouts/Base.astro";
+import PodPagination from "@layouts/components/PodPagination.astro";
+import Podcasts from "@layouts/Podcasts.astro";
+import { getPodcasts } from "@lib/contentParser.astro";
+import { sortPodByDate } from "@lib/utils/sortFunctions";
+import { markdownify } from "@lib/utils/textConverter";
+
+const podcasts = await getPodcasts();
+const sortedPods = sortPodByDate(podcasts);
+const totalPods = Math.ceil(podcasts.length / config.settings.pagination);
+const currentPods = sortedPods.slice(0, config.settings.pagination);
+---
+<Base>
+  <section class="section">
+    <div class="container">
+      <Podcasts podcasts={podcasts} className="mb-16" />
+      <PodPagination currentPage={1} totalPages={totalPods} />
+    </div>
+  </section>
+</Base>

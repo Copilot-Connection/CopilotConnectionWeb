@@ -6,15 +6,16 @@ export const getSinglePage = async (collection: any) => {
   const allPage = await getCollection(collection);
   const removeIndex = allPage.filter((data:any) => data.id.match(/^(?!-)/));
   const removeDrafts = removeIndex.filter((data:any) => !data.data.draft);
+  //console.log(removeDrafts);
   return removeDrafts;
 };
 
 export const getPodcasts = async () => {
-  console.log('Retrieving podcasts');
+  //console.log('Retrieving podcasts');
   
   const buzzsproutToken = import.meta.env.BUZZSPROUT_TOKEN;
   const buzzsproutPodID = import.meta.env.BUZZSPROUT_PODID;
-  console.log(`Podcast ID: ${buzzsproutPodID}`);
+  //console.log(`Podcast ID: ${buzzsproutPodID}`);
 
   const response = await fetch(`https://www.buzzsprout.com/api/${buzzsproutPodID}/episodes.json`,
   {
@@ -24,6 +25,10 @@ export const getPodcasts = async () => {
   
   const json = await response.json();
   console.log(json);
+  json.map((pod: any) => {
+    //console.log(pod.id);
+    pod.slug = pod.id;
+  });
   return json;
 };
 ---

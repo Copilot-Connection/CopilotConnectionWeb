@@ -32,7 +32,7 @@ const { className, podcasts, fluid } = Astro.props;
           </li>
         </ul>
         <h3 class="mb-4">
-          <a href={`/`} class="block hover:text-primary transition duration-300">
+          <a href={`/pod/${podcast.slug}`} class="block hover:text-primary transition duration-300">
             {podcast.title}
           </a>
         </h3>

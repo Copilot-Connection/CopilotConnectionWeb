@@ -1,0 +1,81 @@
+---
+import { Image } from "@astrojs/image/components";
+import Share from "@components/Share.astro";
+import SimilarPodcasts from "@components/SimilarPodcasts.astro";
+import { getPodcasts } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+import similarPodcasts from "@lib/utils/similarPodcasts";
+import { humanize,markdownify,slugify } from "@lib/utils/textConverter";
+import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  podcast: CollectionEntry<'podcast'>;
+}
+
+const podcasts = await getPodcasts();
+const { podcast } = Astro.props;
+const similarPods = similarPodcasts(podcast, podcasts, podcast.slug);
+const { title, description, artwork_url, published_at, tags } =
+podcast;
+---
+
+<section class="section">
+  <div class="container">
+    <article class="row justify-center">
+    
+      <div class="col-12 mt-8 mb-2">
+        {artwork_url && (
+          <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
+            <Image
+              class="group-hover:scale-[1.03] transition duration-300 w-full"
+              src={artwork_url}
+              alt={title}
+              width={podcast.id === 0 ? 925 : 445}
+              height={podcast.id === 0 ? 475 : 230}
+            />
+          </a>
+        )}
+      </div>
+
+      <div class="md:col-10">
+        <div class="content mb-16 text-left">
+          <Fragment set:html={description} />
+        </div>
+        <div class="flex flex-wrap items-center justify-between">
+          <ul class="mr-4 mb-4 space-x-3">
+            {
+              tags && tags.map((tag: string) => (
+                <li class="inline-block">
+                  <a
+                    href={`/tags/${slugify(tag)}`}
+                    class="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark text-sm hover:text-primary transition duration-300"
+                  >
+                    #{humanize(tag)}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <Share
+            className="social-share mb-4"
+            title={title}
+            description={description}
+            slug={podcast.slug}
+          />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- similar posts -->
+{
+  similarPods.length > 0 && (
+    <section class="section pt-0">
+      <div class="container">
+        <h2 class="mb-8 text-center h3">Similar Posts</h2>
+        <SimilarPodcasts posts={similarPods.slice(0, 3)} />
+      </div>
+    </section>
+  )
+}

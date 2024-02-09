@@ -1,0 +1,37 @@
+---
+import { Image } from "@astrojs/image/components";
+
+import PodcastSingle from "@layouts/PodcastSingle.astro";
+import Base from "@layouts/Base.astro";
+import { getPodcasts } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+
+import { sortByDate } from "@lib/utils/sortFunctions";
+import { humanize,slugify } from "@lib/utils/textConverter";
+
+export async function getStaticPaths() {
+  const podcasts = await getPodcasts();
+
+  const paths = podcasts.map((podcast) => ({
+    params: {
+      single: podcast.slug,
+    },
+    props: { podcast },
+  }));
+  return paths;
+}
+
+const { podcast } = Astro.props;
+const { title, description, artwork_url, published_at, tags } = podcast;
+
+
+---
+
+<Base
+  title={title}
+  description={description}
+  artwork_url={artwork_url}
+>
+  <PodcastSingle podcast={podcast} />
+
+</Base>

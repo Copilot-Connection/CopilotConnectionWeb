@@ -16,6 +16,32 @@ const postsCollection = defineCollection({
   }),
 });
 
+const podcastsCollection =defineCollection({
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    audio_url: z.string(),
+    artwork_url: z.string(),
+    description: z.string().optional(),
+    summary: z.string().optional(),
+    artist: z.string().optional(),
+    tags: z.string().optional(),
+    published_at: z.date(),
+    duration: z.number().optional(),
+    hq: z.boolean().optional(),
+    magic_mastering: z.boolean().optional(),
+    guid: z.string().optional(),
+    inactive_at: z.boolean().optional(),
+    custom_url: z.string().optional(),
+    episode_number: z.boolean().optional(),
+    season_number: z.boolean().optional(),
+    episode_type: z.string().optional(),
+    explicit: z.boolean().optional(),
+    private: z.boolean().optional(),
+    total_plays: z.number().optional(),
+  })
+})
+
 // Author collection schema
 const authorsCollection = defineCollection({
   schema: z.object({
