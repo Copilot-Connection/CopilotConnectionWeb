@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import { contentfulClient } from "./contenful";
 
 export const getSinglePage = async (collection: any) => {
   const allPage = await getCollection(collection);
-  const removeIndex = allPage.filter((data) => data.id.match(/^(?!-)/));
-  const removeDrafts = removeIndex.filter((data) => !data.data.draft);
+  const removeIndex = allPage.filter((data:any) => data.id.match(/^(?!-)/));
+  const removeDrafts = removeIndex.filter((data:any) => !data.data.draft);
   return removeDrafts;
 };
 
@@ -20,8 +21,9 @@ export const getPodcasts = async () => {
     method: 'GET',
     headers: {'Authorization':`Token token=${buzzsproutToken}`},
   });
-
+  
   const json = await response.json();
+  console.log(json);
   return json;
 };
 ---
