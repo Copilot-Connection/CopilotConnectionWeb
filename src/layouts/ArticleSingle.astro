@@ -1,0 +1,50 @@
+---
+import { Image } from "@astrojs/image/components";
+import Share from "@components/Share.astro";
+import { getArticles } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+import similerItems from "@lib/utils/similarItems";
+import { humanize,markdownify,slugify } from "@lib/utils/textConverter";
+import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+
+const posts = await getArticles("articles");
+const { article } = Astro.props;
+const { postId, title, subtitle, postDate } = article.fields;
+---
+
+<section class="section">
+  <div class="container">
+    <article class="row justify-center">
+      <div class="md:col-10 text-center">
+        <h1 set:html={markdownify(title)} class="h2" />
+        <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
+          <li class="mx-3 flex items-center flex-wrap font-medium">
+            <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
+            <>{dateFormat(postDate)}</>
+          </li>
+          <li class="mx-3 flex items-center flex-wrap">
+            <BiCategoryAlt className="mr-1 h-[18px] w-[18px] text-gray-600" />
+            <>
+            </>
+          </li>
+        </ul>
+      </div>
+
+      <div class="md:col-10">
+        <div class="content mb-16 text-left">
+          <article set:html={documentToHtmlString(article.fields.content)}></article>
+        </div>
+        <div class="flex flex-wrap items-center justify-between">
+          <Share
+            className="social-share mb-4"
+            title={title}
+            description={article.fields.subtitle}
+            slug={article.fields.postId}
+          />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+

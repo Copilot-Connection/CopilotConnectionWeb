@@ -1,0 +1,37 @@
+---
+import Base from "@layouts/Base.astro";
+import Posts from "@layouts/Posts.astro";
+import ArticleSingle from "@layouts/ArticleSingle.astro";
+import { getArticles } from "@lib/contentParser.astro";
+import { getTaxonomy } from "@lib/taxonomyParser.astro";
+import taxonomyFilter from "@lib/utils/taxonomyFilter";
+import { humanize } from "@lib/utils/textConverter";
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+
+  const paths = articles.map((article: any) => ({
+    params: {
+      article: article.fields.postId,
+    },
+    props: { article },
+  }));
+  return paths;
+}
+
+
+const { article } = Astro.props;
+const { title, description, artwork_url, published_at, tags } = article;
+
+
+---
+
+<Base
+  title={title}
+  description={description}
+  artwork_url={artwork_url}
+>
+  <ArticleSingle article={article} />
+
+</Base>
+
