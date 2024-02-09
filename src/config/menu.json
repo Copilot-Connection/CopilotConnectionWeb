@@ -9,11 +9,7 @@
       "url": "/about"
     },
     {
-      "name": "Contact",
-      "url": "/contact"
-    },
-    {
-      "name": "Pages",
+      "name": "Articles",
       "url": "",
       "hasChildren": true,
       "children": [

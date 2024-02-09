@@ -24,7 +24,7 @@ export const getPodcasts = async () => {
   });
   
   const json = await response.json();
-  console.log(json);
+  //console.log(json);
   json.map((pod: any) => {
     //console.log(pod.id);
     pod.slug = pod.id;

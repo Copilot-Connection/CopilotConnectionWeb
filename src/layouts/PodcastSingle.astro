@@ -16,7 +16,7 @@ interface Props {
 const podcasts = await getPodcasts();
 const { podcast } = Astro.props;
 const similarPods = similarPodcasts(podcast, podcasts, podcast.slug);
-const { id, title, description, artwork_url, published_at, tags } =
+const { id, title, description, artwork_url, published_at, tags, audio_url } =
 podcast;
 ---
 
@@ -50,7 +50,7 @@ podcast;
         <div class="content mb-16 text-left">
           <Fragment set:html={description} />
         </div>
-        <Player podcastId={id} audio_url="" />
+        <Player podcastId={id} audio_url={audio_url} />
         <div class="flex flex-wrap items-center justify-between">
           <ul class="mr-4 mb-4 space-x-3">
             {
