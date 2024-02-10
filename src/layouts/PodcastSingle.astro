@@ -51,6 +51,11 @@ podcast;
           <Fragment set:html={description} />
         </div>
         <Player podcastId={id} audio_url={audio_url} />
+        <div class="content mb-16 text-center">
+          <div>
+            <a href={podcast.audio_url.replace('.mp3','')} target="_blank">View further transcription and other details</a>
+          </div>
+        </div>
         <div class="flex flex-wrap items-center justify-between">
           <ul class="mr-4 mb-4 space-x-3">
             {

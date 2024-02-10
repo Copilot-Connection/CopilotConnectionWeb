@@ -30,6 +30,8 @@ export const getPodcasts = async () => {
   json.map((pod: any) => {
     //console.log(pod.id);
     pod.slug = slugify(pod.title);
+
+    //TODO: retrieve transcription from webpage
   });
   return json;
 };
