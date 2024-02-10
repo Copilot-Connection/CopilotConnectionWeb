@@ -10,7 +10,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 const posts = await getArticles("articles");
 const { article } = Astro.props;
-const { postId, title, subtitle, postDate } = article.fields;
+const { postId, title, subtitle, postDate, slug } = article.fields;
 ---
 
 <section class="section">
@@ -21,12 +21,27 @@ const { postId, title, subtitle, postDate } = article.fields;
         <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
           <li class="mx-3 flex items-center flex-wrap font-medium">
             <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
-            <>{dateFormat(postDate)}</>
+            <>
+              <ul>
+                {article.metadata.tags && article.metadata.tags.map(
+                  (tag: string, i: number) => (
+                    <li class="inline-block">
+                      <a
+                        href={`/tags/${slugify(tag.sys.id)}`}
+                        class="mr-2 hover:text-primary font-medium"
+                      >
+                        {humanize(tag.sys.id)}
+                        {i !== article.metadata.tags.length - 1 && ","}
+                      </a>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </>
           </li>
           <li class="mx-3 flex items-center flex-wrap">
             <BiCategoryAlt className="mr-1 h-[18px] w-[18px] text-gray-600" />
-            <>
-            </>
+            <>{dateFormat(postDate)}</>
           </li>
         </ul>
       </div>
@@ -40,7 +55,7 @@ const { postId, title, subtitle, postDate } = article.fields;
             className="social-share mb-4"
             title={title}
             description={article.fields.subtitle}
-            slug={article.fields.postId}
+            slug={article.fields.slug}
           />
         </div>
       </div>

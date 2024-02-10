@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Copilot Connection",
-    "base_url": "https://bookworm-light-astro.vercel.app",
+    "base_url": "https://www.copilotconnection.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",

@@ -2,11 +2,17 @@
 import Base from "@layouts/Base.astro";
 import { getTaxonomy } from "@lib/taxonomyParser.astro";
 import { getArticles } from "@lib/contentParser.astro";
-import { humanize } from "@lib/utils/textConverter";
+import { humanize, slugify } from "@lib/utils/textConverter";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 const articles = await getArticles();
 console.log(articles);
+articles.map((article) => {
+  //console.log(article);
+  (article.metadata.tags && article.metadata.tags.map((tag) => {
+    console.log(tag);
+  }))
+});
 
 import { BiCategoryAlt } from "react-icons/bi/index.js";
 ---
@@ -18,13 +24,14 @@ import { BiCategoryAlt } from "react-icons/bi/index.js";
       <ul class="space-x-4">
         {
           articles && articles.map((article) => (
+            
             <li class="inline-block">
               <a
-                href={`/articles/${article.fields.postId}`}
+                href={`/articles/${slugify(article.fields.title)}`}
                 class="rounded-lg bg-theme-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
               >
-                <BiCategoryAlt className="mr-1 text-primary group-hover:text-white transition h-6 w-6 scale-75" />
-                <article set:html={documentToHtmlString(article.fields.content)}></article>
+                
+                <div>{article.fields.title}</div>
               </a>
             </li>
           ))

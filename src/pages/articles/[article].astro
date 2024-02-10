@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
   const paths = articles.map((article: any) => ({
     params: {
-      article: article.fields.postId,
+      article: article.fields.slug,
     },
     props: { article },
   }));
