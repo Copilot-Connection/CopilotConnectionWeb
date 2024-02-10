@@ -15,11 +15,11 @@
       "children": [
         {
           "name": "Copilots",
-          "url": "/copilots",
-          "children":[{
-            "name": "Copilots",
-            "url": "/copilots"
-          }]
+          "url": "/articles/copilots"
+        },
+        {
+          "name": "Microsoft Copilot",
+          "url": "/articles/microsoft-copilot"
         },
         {
           "name": "Privacy Policy",
