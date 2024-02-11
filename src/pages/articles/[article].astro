@@ -2,13 +2,13 @@
 import Base from "@layouts/Base.astro";
 import Posts from "@layouts/Posts.astro";
 import ArticleSingle from "@layouts/ArticleSingle.astro";
-import { getArticles } from "@lib/contentParser.astro";
+import { getCopilots } from "@lib/contentParser.astro";
 import { getTaxonomy } from "@lib/taxonomyParser.astro";
 import taxonomyFilter from "@lib/utils/taxonomyFilter";
 import { humanize } from "@lib/utils/textConverter";
 
 export async function getStaticPaths() {
-  const articles = await getArticles();
+  const articles = await getCopilots();
 
   const paths = articles.map((article: any) => ({
     params: {

@@ -1,15 +1,16 @@
 ---
 import { Image } from "@astrojs/image/components";
 import Share from "@components/Share.astro";
-import { getArticles } from "@lib/contentParser.astro";
+import { getCopilots } from "@lib/contentParser.astro";
 import dateFormat from "@lib/utils/dateFormat";
 import similerItems from "@lib/utils/similarItems";
 import { humanize,markdownify,slugify } from "@lib/utils/textConverter";
 import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
-const posts = await getArticles("articles");
+const posts = await getCopilots();
 const { article } = Astro.props;
+console.log(article);
 const { postId, title, subtitle, postDate, slug } = article.fields;
 ---
 
@@ -48,7 +49,29 @@ const { postId, title, subtitle, postDate, slug } = article.fields;
 
       <div class="md:col-10">
         <div class="content mb-16 text-left">
-          <article set:html={documentToHtmlString(article.fields.content)}></article>
+          <h2>Intro</h2>
+          <article set:html={article.fields.intro}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>Who is it for?</h2>
+          <article set:html={article.fields.whoItItForList}></article>
+          <article set:html={documentToHtmlString(article.fields.whoItItFor)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>What does it do?</h2>
+          <article set:html={documentToHtmlString(article.fields.whatDoesItDo)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>How to get it and use it?</h2>
+          <article set:html={documentToHtmlString(article.fields.howToGetItAndUseIt)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>How is it licensed?</h2>
+          <article set:html={documentToHtmlString(article.fields.howIsItLicensed)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>Examples</h2>
+          <article set:html={documentToHtmlString(article.fields.examples)}></article>
         </div>
         <div class="flex flex-wrap items-center justify-between">
           <Share
