@@ -9,29 +9,17 @@
       "url": "/about"
     },
     {
-      "name": "Contact",
-      "url": "/contact"
-    },
-    {
-      "name": "Pages",
-      "url": "",
+      "name": "Articles",
+      "url": "/articles",
       "hasChildren": true,
       "children": [
         {
-          "name": "Authors",
-          "url": "/authors"
+          "name": "Copilots",
+          "url": "/articles/copilots"
         },
         {
-          "name": "Categories",
-          "url": "/categories"
-        },
-        {
-          "name": "Tags",
-          "url": "/tags"
-        },
-        {
-          "name": "Elements",
-          "url": "/elements"
+          "name": "Microsoft Copilot",
+          "url": "/articles/microsoft-copilot"
         },
         {
           "name": "Privacy Policy",

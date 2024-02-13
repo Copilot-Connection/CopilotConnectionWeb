@@ -1,26 +1,59 @@
 ---
 import { getCollection } from "astro:content";
+import { contentfulClient } from "./contenful";
+import { Article } from "../interfaces/article";
+import { CopilotArticle } from "../interfaces/copilotArticle";
+import { humanize, slugify } from "@lib/utils/textConverter";
 
 export const getSinglePage = async (collection: any) => {
   const allPage = await getCollection(collection);
-  const removeIndex = allPage.filter((data) => data.id.match(/^(?!-)/));
-  const removeDrafts = removeIndex.filter((data) => !data.data.draft);
+  const removeIndex = allPage.filter((data:any) => data.id.match(/^(?!-)/));
+  const removeDrafts = removeIndex.filter((data:any) => !data.data.draft);
+  //console.log(removeDrafts);
   return removeDrafts;
 };
 
 export const getPodcasts = async () => {
+  //console.log('Retrieving podcasts');
+  
   const buzzsproutToken = import.meta.env.BUZZSPROUT_TOKEN;
   const buzzsproutPodID = import.meta.env.BUZZSPROUT_PODID;
+  //console.log(`Podcast ID: ${buzzsproutPodID}`);
+
   const response = await fetch(`https://www.buzzsprout.com/api/${buzzsproutPodID}/episodes.json`,
   {
     method: 'GET',
     headers: {'Authorization':`Token token=${buzzsproutToken}`},
   });
-
+  
   const json = await response.json();
-  //const { film } = json.data;
-  // const allPage = await getCollection(json);
-  console.log(json);
+  //console.log(json);
+  json.map((pod: any) => {
+    //console.log(pod.id);
+    pod.slug = slugify(pod.title);
+
+    //TODO: retrieve transcription from webpage
+  });
   return json;
+};
+
+export const getCopilots = async () => {
+  const entries = await contentfulClient.getEntries<CopilotArticle>({
+    content_type: "copilot",
+  });
+  entries.items.map((article) => {
+    article.fields.slug = slugify(article.fields.title);
+  });
+  return entries.items;
+};
+
+export const getArticlesText = async () => {
+  const entries = await contentfulClient.getEntries<Article>({
+    content_type: "newsPost",
+  });
+  entries.items.map((article) => {
+    article.fields.slug = slugify(article.fields.title);
+  });
+  return entries.items[0];
 };
 ---

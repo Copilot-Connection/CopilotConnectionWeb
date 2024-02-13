@@ -1,0 +1,14 @@
+---
+const { podcastId, audio_url } = Astro.props;
+---
+
+<div id='buzzsprout-small-player'>
+
+</div>
+  <script 
+    type='text/javascript' 
+    charset='utf-8' 
+    src={`${audio_url.replace('.mp3','.js')}?container_id=buzzsprout-player-${podcastId}&player=small`}></script>
+
+
+  
