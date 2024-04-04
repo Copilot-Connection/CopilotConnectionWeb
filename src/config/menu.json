@@ -9,23 +9,8 @@
       "url": "/about"
     },
     {
-      "name": "Articles",
-      "url": "/articles",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Copilots",
-          "url": "/articles/copilots"
-        },
-        {
-          "name": "Microsoft Copilot",
-          "url": "/articles/microsoft-copilot"
-        },
-        {
-          "name": "Privacy Policy",
-          "url": "/privacy-policy"
-        }
-      ]
+      "name": "Month of Copilots",
+      "url": "/MonthOfCopilot"
     }
   ],
   "footer": [
