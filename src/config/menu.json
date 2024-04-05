@@ -9,6 +9,25 @@
       "url": "/about"
     },
     {
+      "name": "Social links",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "YouTube",
+          "url": "https://www.youtube.com/@thecopilotconnection"
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://www.linkedin.com/company/copilot-connection"
+        },
+        {
+          "name": "Twitter/X",
+          "url": "https://twitter.com/CopilotConnect"
+        }
+      ]
+    },
+    {
       "name": "Month of Copilots",
       "url": "/monthofcopilot"
     }
@@ -21,10 +40,6 @@
     {
       "name": "Contact",
       "url": "/contact"
-    },
-    {
-      "name": "Elements",
-      "url": "/elements"
     },
     {
       "name": "Privacy Policy",
