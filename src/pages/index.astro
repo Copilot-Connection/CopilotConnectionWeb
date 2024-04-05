@@ -13,7 +13,14 @@ const currentPosts = sortedPodcasts.slice(0, config.settings.pagination);
 ---
 
 <Base>
-  <section class="section">
+  
+<section class="section">
+    <div class="container">
+Welcome to Copilot Connection, the podcast that explores the world of Microsoft Copilots! Join your hosts, Zoe Wilson and Kevin McDonnell, as they take you on a journey through the different Copilots available and how they can help you in your day-to-day life. From the newly launch date announced Microsoft 365 Copilot to the Dynamics 365, GitHub, Windows, Custom and more Copilots, we'll cover it all. Our upbeat and engaging conversations with experts in the field will keep you entertained and informed. Tune in to Copilot Connection and discover how these AI-powered assistants can transform the way you work!
+
+    </div>
+  </section>
+<section class="section">
     <div class="container">
       <Podcasts podcasts={podcasts} className="mb-16" />
       <PodPagination currentPage={1} totalPages={totalPods} />
