@@ -1,11 +1,10 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Picture } from "astro-imagetools/components";
 import config from "@config/config.json";
 import { getSinglePage } from "@lib/contentParser.astro";
 import dateFormat from "@lib/utils/dateFormat";
 import { humanize,slugify } from "@lib/utils/textConverter";
 import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
-const authors = await getSinglePage("authors");
 const { summary_length } = config.settings;
 const { className, podcasts, fluid } = Astro.props;
 ---
@@ -16,7 +15,7 @@ const { className, podcasts, fluid } = Astro.props;
       <div class={i === 0 && fluid != false ? "col-12" : "col-12 sm:col-6"}>
         {podcast.artwork_url && (
           <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
-            <Image
+            <Picture
               class="group-hover:scale-[1.03] transition duration-300 w-full"
               src={podcast.artwork_url}
               alt={podcast.title}
@@ -32,12 +31,12 @@ const { className, podcasts, fluid } = Astro.props;
           </li>
         </ul>
         <h3 class="mb-4">
-          <a href={`/`} class="block hover:text-primary transition duration-300">
+          <a href={`/pod/${podcast.slug}`} class="block hover:text-primary transition duration-300">
             {podcast.title}
           </a>
         </h3>
         <p class="text-text">
-          {podcast.description?.slice(0, Number(i === 0 && fluid != false ? summary_length * 2 : summary_length))}...
+          <Fragment set:html={podcast.description?.slice(0, Number(i === 0 && fluid != false ? summary_length * 2 : summary_length))} />...
         </p>
       </div>
     ))

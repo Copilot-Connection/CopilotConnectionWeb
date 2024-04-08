@@ -1,0 +1,88 @@
+---
+import { Image } from "@astrojs/image/components";
+import Share from "@components/Share.astro";
+import { getCopilots } from "@lib/contentParser.astro";
+import dateFormat from "@lib/utils/dateFormat";
+import similerItems from "@lib/utils/similarItems";
+import { humanize,markdownify,slugify } from "@lib/utils/textConverter";
+import { BiCalendarEdit,BiCategoryAlt } from "react-icons/bi/index.js";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+
+const posts = await getCopilots();
+const { article } = Astro.props;
+console.log(article);
+const { postId, title, subtitle, postDate, slug } = article.fields;
+---
+
+<section class="section">
+  <div class="container">
+    <article class="row justify-center">
+      <div class="md:col-10 text-center">
+        <h1 set:html={markdownify(title)} class="h2" />
+        <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
+          <li class="mx-3 flex items-center flex-wrap font-medium">
+            <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
+            <>
+              <ul>
+                {article.metadata.tags && article.metadata.tags.map(
+                  (tag: string, i: number) => (
+                    <li class="inline-block">
+                      <a
+                        href={`/tags/${slugify(tag.sys.id)}`}
+                        class="mr-2 hover:text-primary font-medium"
+                      >
+                        {humanize(tag.sys.id)}
+                        {i !== article.metadata.tags.length - 1 && ","}
+                      </a>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </>
+          </li>
+          <li class="mx-3 flex items-center flex-wrap">
+            <BiCategoryAlt className="mr-1 h-[18px] w-[18px] text-gray-600" />
+            <>{dateFormat(postDate)}</>
+          </li>
+        </ul>
+      </div>
+
+      <div class="md:col-10">
+        <div class="content mb-16 text-left">
+          <h2>Intro</h2>
+          <article set:html={article.fields.intro}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>Who is it for?</h2>
+          <article set:html={article.fields.whoItItForList}></article>
+          <article set:html={documentToHtmlString(article.fields.whoItItFor)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>What does it do?</h2>
+          <article set:html={documentToHtmlString(article.fields.whatDoesItDo)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>How to get it and use it?</h2>
+          <article set:html={documentToHtmlString(article.fields.howToGetItAndUseIt)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>How is it licensed?</h2>
+          <article set:html={documentToHtmlString(article.fields.howIsItLicensed)}></article>
+        </div>
+        <div class="content mb-16 text-left">
+          <h2>Examples</h2>
+          <article set:html={documentToHtmlString(article.fields.examples)}></article>
+        </div>
+        <div class="flex flex-wrap items-center justify-between">
+          <Share
+            className="social-share mb-4"
+            title={title}
+            description={article.fields.subtitle}
+            slug={article.fields.slug}
+          />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+

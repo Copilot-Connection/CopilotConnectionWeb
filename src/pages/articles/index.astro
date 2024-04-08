@@ -1,0 +1,65 @@
+---
+import Base from "@layouts/Base.astro";
+import { getTaxonomy } from "@lib/taxonomyParser.astro";
+import { getArticlesText, getCopilots } from "@lib/contentParser.astro";
+import { humanize, slugify } from "@lib/utils/textConverter";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import Share from "@components/Share.astro";
+
+const articles = await getCopilots();
+const articleText = await getArticlesText();
+//console.log(articles);
+//console.log(articleText);
+articles.map((article) => {
+  //console.log(article);
+  (article.metadata.tags && article.metadata.tags.map((tag) => {
+    //console.log(tag);
+  }))
+});
+
+
+
+import { BiCategoryAlt } from "react-icons/bi/index.js";
+---
+
+<Base title={"Articles"}>
+  <section class="section">
+    <div class="container text-center">
+      <h1 class="h2 page-heading">Copilots</h1>
+      <ul class="space-x-4">
+        {
+          articles && articles.map((article) => (
+            
+            <li class="inline-block">
+              <a
+                href={`/articles/${slugify(article.fields.title)}`}
+                class="rounded-lg bg-theme-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
+              >
+                
+                <div>{article.fields.title}</div>
+              </a>
+            </li>
+            <li class="inline-block"></li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="container">
+      <article class="row justify-center">
+  
+        <div class="md:col-10">
+          <div class="content mb-16 text-left">
+            <article set:html={documentToHtmlString(articleText.fields.content)}></article>
+          </div>
+          <div class="flex flex-wrap items-center justify-between">
+            <Share
+              className="social-share mb-4"
+              title="Copilots"
+              description="An overview of the Microsoft Copilots"
+              slug="articles"
+            />
+          </div>
+        </div>
+      </article>
+  </section>
+</Base>
