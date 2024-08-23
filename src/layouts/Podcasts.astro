@@ -16,7 +16,10 @@ const { className, podcasts, fluid } = Astro.props;
         {podcast.artwork_url && (
           <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
             <Picture
-              class="group-hover:scale-[1.03] transition duration-300 w-full"
+            attributes={{
+                class:"group-hover:scale-[1.03] transition duration-300 w-full"
+              }
+            }
               src={podcast.artwork_url}
               alt={podcast.title}
               width={i === 0 ? 925 : 445}

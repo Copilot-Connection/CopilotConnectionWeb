@@ -1,7 +1,8 @@
 ---
-title: "Month of Copilot"
+title: "June is the Month of Copilot"
 meta_title: "Month of Copilot"
 image: "/images/author.png"
+bannerImage: "/images/MonthOfCopilotBanner.png"
 draft: false
 ---
 

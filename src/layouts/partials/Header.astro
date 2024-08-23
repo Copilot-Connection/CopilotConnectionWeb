@@ -4,7 +4,6 @@ import menu from "@config/menu.json";
 import { Picture } from "astro-imagetools/components";
 import { IoSearch } from "react-icons/io5/index.js";
 import { Image } from "@astrojs/image/components";
-import bannerImage from "@assets/banner.png";
 
 export interface ChildNavigationLink {
   name: string;
@@ -19,6 +18,8 @@ export interface NavigationLink {
 }
 
 const { main }: { main: NavigationLink[] } = menu;
+const { bannerImage } = Astro.props;
+const bannerLink = bannerImage || "/src/assets/banner.png";
 ---
 
 <header class="header pt-6">
@@ -107,7 +108,7 @@ const { main }: { main: NavigationLink[] } = menu;
           style: `opacity: 0.7}`,
         },
       }}
-      src="/src/assets/banner.png"
+      src={bannerLink}
       width={1020}
       height={260}
       ar={16 / 10}
