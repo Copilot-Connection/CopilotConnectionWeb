@@ -28,7 +28,9 @@ podcast;
         {artwork_url && (
           <a href={`/`} class="rounded-lg block hover:text-primary overflow-hidden group">
             <Picture
-              class="group-hover:scale-[1.03] transition duration-300 w-full"
+              attributes={{
+                  class:"group-hover:scale-[1.03] transition duration-300 w-full"
+              }}
               src={artwork_url}
               alt={title}
               width={podcast.id === 0 ? 925 : 445}
