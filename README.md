@@ -1,6 +1,6 @@
 <h1 align=center>Copilot Connection Web powered by Bookworm Light Astro</h1>
 
-Latest episode - 28
+Latest episode - 30
 
 <p align=center>Bookworm Light is a feature-rich, minimal, highly customizable, easy-to-use free Astro blog theme.</p>
 <h2 align="center"> <a target="_blank" href="https://bookworm-light-astro.vercel.app/" rel="nofollow">👀Demo</a> | <a  target="_blank" href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fbookworm-light-astro.vercel.app%2F&form_factor=desktop">Page Speed (100%)🚀</a>
