@@ -7,8 +7,11 @@ const similarPodcasts = (currentItem: any, allItems: any, slug: string) => {
   }
 
   // filter by tags
-  const filterByTags = allItems.filter((item: { tags: string }) =>
+  /*const filterByTags = allItems.filter((item: { tags: string }) =>
     tags.find((tag) => item.tags.includes(tag))
+  );*/
+  const filterByTags = allItems.filter((item: { data: { tags: string } }) =>
+    tags.find((tag) => item.data.tags.includes(tag))
   );
 
   // merged after filter
