@@ -12,7 +12,7 @@ const posts = await getSinglePage("posts");
 const { post } = Astro.props;
 const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await post.render();
-const { title, description, categories, image, date, tags } =
+const { title, description, categories, image, date } =
   post.data;
 ---
 
@@ -65,7 +65,7 @@ const { title, description, categories, image, date, tags } =
           <Content />
         </div>
         <div class="flex flex-wrap items-center justify-between">
-          <ul class="mr-4 mb-4 space-x-3">
+          <!--<ul class="mr-4 mb-4 space-x-3">
             {
               tags.map((tag: string) => (
                 <li class="inline-block">
@@ -78,7 +78,7 @@ const { title, description, categories, image, date, tags } =
                 </li>
               ))
             }
-          </ul>
+          </ul>-->
           <Share
             className="social-share mb-4"
             title={title}
